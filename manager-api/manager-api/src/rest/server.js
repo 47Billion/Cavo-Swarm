@@ -158,11 +158,14 @@ var jobStatus = function jobStatus(req, res, next) {
                 }if (data.state === 2) {
                     data.state = 'Finished'
                 }
-                if(data. assigned_on){
-                    data.assigned_on = moment(data.assigned_on * 1000).format('MMMM Do YYYY, h:mm:ss a');
+                if (data.assigned_on) {
+                    data.assigned_on = moment(data.assigned_on * 1000).format('MMMM Do YYYY, h:mm:ss a Z');
                 }
-                if(data. finished_on){
-                    data.assigned_on = moment(data.finished_on * 1000).format('MMMM Do YYYY, h:mm:ss a');
+                if (data.finished_on) {
+                    data.finished_on = moment(data.finished_on * 1000).format('MMMM Do YYYY, h:mm:ss a Z');
+                }
+                if (data.submitted_on) {
+                    data.submitted_on = moment(data.submitted_on * 1000).format('MMMM Do YYYY, h:mm:ss a Z');
                 }
                 return res.status(200).json(data
                 );
