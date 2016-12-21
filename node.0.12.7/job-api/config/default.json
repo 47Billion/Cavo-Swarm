@@ -17,6 +17,6 @@
   "rest": {
     "registration": "http://172.31.43.109:8080/rest/v1/registration",
     "degistration": "http://172.31.43.109:8080/rest/v1/deregister",
-    "serverStatusUrl": "http://172.31.43.109:8080/rest/v1/ping"
+    "serverStatusUrl": "http://172.31.43.109:8080/rest/v1/node/heartbeat"
   }
 }
