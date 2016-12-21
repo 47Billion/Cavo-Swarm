@@ -1,0 +1,22 @@
+{
+  "logger": {
+    "level": "debug",
+    "filename": "server.log",
+    "errorLogFile": "error.log",
+    "handleExceptions": true,
+    "apiKey": ""
+  },
+  "server": {
+    "instance": "instance1",
+    "queue": "queue1"
+  },
+  "rabbit": {
+    "host": "amqp://localhost:",
+    "port": "5672"
+  },
+  "rest": {
+    "registration": "http://172.31.43.109:8080/rest/v1/registration",
+    "degistration": "http://172.31.43.109:8080/rest/v1/deregister",
+    "serverStatusUrl": "http://172.31.43.109:8080/rest/v1/ping"
+  }
+}

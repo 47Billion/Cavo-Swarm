@@ -1,0 +1,27 @@
+{
+  "app": {
+    "host": "0.0.0.0",
+    "port": "8081"
+  },
+  "logger": {
+    "level": "debug",
+    "filename": "server.log",
+    "errorLogFile": "error.log",
+    "handleExceptions": true,
+    "apiKey": ""
+  },
+  "db": {
+    "host": "172.31.43.109",
+    "username": "admin",
+    "password": "my-secret-pw",
+    "database": "cavodb",
+    "dialect": "mysql",
+    "minPoolSize": 0,
+    "maxPoolSize": 5,
+    "idleConnectionTimeout": 100000
+  },
+  "rabbit": {
+    "host": "amqp://localhost:",
+    "port": "5672"
+  }
+}
