@@ -12,7 +12,8 @@ var BASE_URL = '/rest/';
 router.post(BASE_URL + 'v1/registration', server.register);
 router.post(BASE_URL + 'v1/deregister', server.deregister);
 router.post(BASE_URL + 'v1/zip/process', server.zipProcess);
-router.post(BASE_URL + 'v1/ping', server.pingServer);
+router.post(BASE_URL + 'v1/node/heartbeat', server.heartbeat);
+router.get(BASE_URL + 'v1/job/:anchor/status', server.jobStatus);
 
 module.exports = function (app) {
     app

@@ -10,12 +10,10 @@ CREATE TABLE clusters (
   PRIMARY KEY (id)
 );
 
- //  -2 = Error; -1 = Booting; 0 = Free; 1 = Occupied;
-
 CREATE TABLE nodes (
  id int  NOT NULL AUTO_INCREMENT,
  hostname varchar(500) UNIQUE,
- cluster varchar(500) UNIQUE,
+ cluster varchar(500),
  start_on BIGINT,
  last_ping BIGINT,
  PRIMARY KEY (id)
@@ -36,9 +34,3 @@ CREATE TABLE jobs (
  unprocessed_files BIGINT,
   PRIMARY KEY (id)
 );
-
-// 0 = submitted; 1 = processing; 2 = finished; -1 = error
- // eventually move to Redis
- // source path
- // case name
-  // Flake ID

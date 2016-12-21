@@ -21,6 +21,8 @@
     "body-parser": "^1.15.2",
     "colors": "^1.1.2",
     "config": "^1.24.0",
+    "cron-emitter": "^0.2.2",
+    "eventemitter2": "^2.2.1",
     "express": "^4.14.0",
     "flake-idgen": "^1.1.0",
     "machinepack-zip": "^1.1.0",

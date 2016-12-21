@@ -4,7 +4,8 @@
 var express = require('express'),
     async = require('async'),
     log = require('src/utils/logger')(module),
-    app = express();
+    app = express(),
+    emitter = require("src/event-handler/emitter");
 
 var http = require('http').Server(app);
 
@@ -13,10 +14,10 @@ http.on('error', function (err) {
     log.error(err.stack);
 });
 
-var initializedModels = require('src/database/init');
-var models = require('src/database');
+var initializedModels = require('src/db/init');
+var models = require('src/db');
 models.set(initializedModels, initializedModels.sequelize);
-var rabbit = require('src/rabbitmq/rabbit').start();
+var rabbit = require('src/queue/rabbit').start();
 
 app
     .use('/', require('src/rest')(app))
