@@ -117,7 +117,7 @@ function startWorker() {
                     closeOnErr(e);
                 }
             });
-         }, 5000);
+         }, 20000);
 
 
         }

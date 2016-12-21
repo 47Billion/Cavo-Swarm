@@ -175,12 +175,36 @@ var jobStatus = function jobStatus(req, res, next) {
     )
 }
 
+var getProcessor = function getProcessor(req, res, next) {
+    db.get('Clusters').findAll({}).then(function (data) {
+            if (data) {
+                for (var i = 0; i < data.length; i++) {
+                    if (data[i].status === 0) {
+                        data[i].status = 'Free'
+                    } else if (data[i].status === 1) {
+                        data.state = 'OCCUPIED'
+                    }
+                    if (data[i].start_on) {
+                        data[i].start_on = moment(data[i].start_on * 1000).format('MMMM Do YYYY, h:mm:ss a');
+                    }
+                }
+                return res.status(200).json(data);
+            } else {
+                return res.status(200).json({
+                    message: "No data found"
+                });
+            }
+        }
+    )
+}
+
 var server = {
     register: register,
     deregister: deregister,
     zipProcess: zipProcess,
     heartbeat: heartbeat,
-    jobStatus: jobStatus
+    jobStatus: jobStatus,
+    processor: getProcessor
 };
 
 module.exports = server;

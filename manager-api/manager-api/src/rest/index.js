@@ -14,6 +14,7 @@ router.post(BASE_URL + 'v1/deregister', server.deregister);
 router.post(BASE_URL + 'v1/zip/process', server.zipProcess);
 router.post(BASE_URL + 'v1/node/heartbeat', server.heartbeat);
 router.get(BASE_URL + 'v1/job/:anchor/status', server.jobStatus);
+router.get(BASE_URL + 'v1/processors', server.processor);
 
 module.exports = function (app) {
     app
