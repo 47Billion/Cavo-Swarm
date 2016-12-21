@@ -185,7 +185,7 @@ var getProcessor = function getProcessor(req, res, next) {
                     if (data[i].status === 0) {
                         data[i].status = 'Free'
                     } else if (data[i].status === 1) {
-                        data.status = 'OCCUPIED'
+                        data[i].status = 'OCCUPIED'
                     }
                     if (data[i].start_on) {
                         data[i].start_on = moment(data[i].start_on * 1000).format('MMMM Do YYYY, h:mm:ss a Z');
