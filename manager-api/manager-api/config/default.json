@@ -11,10 +11,10 @@
     "apiKey": ""
   },
   "db": {
-    "host": "localhost",
-    "username": "root",
-    "password": "root",
-    "database": "manager",
+    "host": "172.31.43.109",
+    "username": "admin",
+    "password": "my-secret-pw",
+    "database": "cavodb",
     "dialect": "mysql",
     "minPoolSize": 0,
     "maxPoolSize": 5,
