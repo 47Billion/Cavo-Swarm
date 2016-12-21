@@ -1,3 +1,4 @@
+
 CREATE TABLE clusters (
   id int  NOT NULL AUTO_INCREMENT,
   name varchar(500) UNIQUE,
@@ -8,11 +9,10 @@ CREATE TABLE clusters (
   PRIMARY KEY (id)
 );
 
-
 CREATE TABLE nodes (
  id int  NOT NULL AUTO_INCREMENT,
  hostname varchar(500) UNIQUE,
- cluster varchar(500) UNIQUE,
+ cluster varchar(500),
  start_on BIGINT,
  last_ping BIGINT,
  PRIMARY KEY (id)

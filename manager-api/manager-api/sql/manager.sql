@@ -1,4 +1,3 @@
- CREATE DATABASE manager;
 
 CREATE TABLE clusters (
   id int  NOT NULL AUTO_INCREMENT,
