@@ -100,13 +100,13 @@ function startWorker() {
         ch.prefetch(10);
         ch.assertQueue(queue, {durable: true}, function (err, _ok) {
             if (closeOnErr(err)) return;
-            setTimeout(function () {
+            
                 ch.consume(queue, processMsg, {noAck: false});
-            }, 5000);
+            
             console.log("Worker is started");
         });
         function processMsg(msg) {
-
+         setTimeout(function () {
             work(msg, function (ok) {
                 try {
                     if (ok)
@@ -117,6 +117,7 @@ function startWorker() {
                     closeOnErr(e);
                 }
             });
+         }, 5000);
 
 
         }
