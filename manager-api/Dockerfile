@@ -29,8 +29,8 @@ ENV PATH      $NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH
 
 RUN npm install pm2 -g
 
-ADD manager-api /manager-api
-ADD run.sh /run.sh
+# ADD manager-api /manager-api
+ADD start.sh /start.sh
 
 RUN mkdir /var/www/api
 

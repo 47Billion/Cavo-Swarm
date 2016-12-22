@@ -25,9 +25,19 @@ ENV PATH      $NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH
 
 RUN npm install pm2 -g
 
-ADD job-api /job-api
-ADD run.sh /run.sh
+# ADD job-api /job-api
+ADD start.sh /start.sh
 
-RUN chmod +x /run.sh
-# RUN /run.sh
-ENTRYPOINT ["/bin/bash", "/run.sh"]
+RUN mkdir /var/www/api
+
+# git repo crontab sh
+RUN echo "* * * * * root /bin/bash /var/www/api/node.0.12.7/cron.sh >> /var/log/cron.log 2>&1" >> /etc/crontab
+
+# Create the log file to be able to run tail
+RUN touch /var/log/cron.log
+
+RUN apt-get -y autoclean && apt-get clean --quiet && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+RUN chmod +x /start.sh
+
+ENTRYPOINT ["/bin/bash", "/start.sh"]
