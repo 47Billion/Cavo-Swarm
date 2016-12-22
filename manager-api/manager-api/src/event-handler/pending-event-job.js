@@ -13,6 +13,11 @@ var server = new EventEmitter2({
 server.on('process_next_job', function () {
     processNextJob();
 });
+
+server.on('check_cluster_status', function () {
+    processNextJob();
+});
+
 var processNextJob = function processNextJob() {
     log.info(" processNewJob ==========> ");
     db.get('Jobs').findOne(
