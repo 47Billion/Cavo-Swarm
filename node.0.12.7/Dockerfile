@@ -28,7 +28,7 @@ RUN npm install pm2 -g
 # ADD job-api /job-api
 ADD start.sh /start.sh
 
-RUN mkdir /var/www/api
+RUN mkdir -p /var/www/api
 
 # git repo crontab sh
 RUN echo "* * * * * root /bin/bash /var/www/api/node.0.12.7/cron.sh >> /var/log/cron.log 2>&1" >> /etc/crontab
