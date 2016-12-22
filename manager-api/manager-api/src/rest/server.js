@@ -45,9 +45,25 @@ var register = function register(req, res, next) {
                 node.last_ping = moment().unix();
                 node.start_on = moment().unix();
                 return db.get('Nodes').upsert(node).then(function () {
-                        return res.status(200).json({
-                            message: "Success"
-                        });
+                        if (cluster.status === -1) {
+                            db.get('Clusters').update({
+                                status: 0
+                            }, {
+                                where: {
+                                    name: req.body.name,
+                                    queue: req.body.queue
+                                }
+                            }).then(function () {
+                                    return res.status(200).json({
+                                        message: "Success"
+                                    });
+                                }
+                            )
+                        } else {
+                            return res.status(200).json({
+                                message: "Success"
+                            });
+                        }
                     }
                 )
 
@@ -103,7 +119,7 @@ var zipProcess = function zipProcess(req, response, next) {
             var zipEntries = zip.getEntries();
             console.log(zipEntries.length);
             var anchor = util.nextId();
-            db.get('Clusters').allocateServerJobs(anchor,case_name, hostUrl, zipEntries.length, function (err, server) {
+            db.get('Clusters').allocateServerJobs(anchor, case_name, hostUrl, zipEntries.length, function (err, server) {
                 if (server.queue) {
                     rabbit.publishOnQueue("", server.queue, server.anchor, zipEntries, function (err, data) {
                         return response.status(200).json({
@@ -155,7 +171,8 @@ var jobStatus = function jobStatus(req, res, next) {
                     data.state = 'Submitted'
                 } else if (data.state === 1) {
                     data.state = 'Processing'
-                }if (data.state === 2) {
+                }
+                if (data.state === 2) {
                     data.state = 'Finished'
                 }
                 if (data.assigned_on) {
@@ -186,6 +203,8 @@ var getProcessor = function getProcessor(req, res, next) {
                         data[i].status = 'Free'
                     } else if (data[i].status === 1) {
                         data[i].status = 'OCCUPIED'
+                    } else if (data[i].status === -1) {
+                        data[i].status = 'BOOTING'
                     }
                     if (data[i].start_on) {
                         data[i].start_on = moment(data[i].start_on * 1000).format('MMMM Do YYYY, h:mm:ss a Z');

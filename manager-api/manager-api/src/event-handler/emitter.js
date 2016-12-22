@@ -7,7 +7,8 @@ var CronEmitter = require("cron-emitter").CronEmitter,
     moment = require('moment'),
     emitter = new CronEmitter(),
     db = require('src/db'),
-    async = require('async');
+    async = require('async'),
+    eventReceiver = require('src/event-handler/pending-event-job');
 
 emitter.add("*/30 * * * * *", "every_ten_seconds");
 
@@ -30,6 +31,8 @@ function checkServerHeartbeat(node, currentTime, next) {
     if (diff > 30) {
         db.get('Nodes').destroy({where: {id: node.id}})
             .then(function () {
+                //processNewJob(next);
+                eventReceiver.emit('check_cluster_heartbeat',node.cluster);
                 next();
             })
     } else {
