@@ -7,7 +7,7 @@ export NODE_ENV=$1
 # git clone Cavo-Swarm
 cd /var/www/api
 git clone https://$2@github.com/47Billion/Cavo-Swarm.git .
-#git checkout $1
+git checkout $1
 git pull
 cd /var/www/api/node.0.12.7/job-api/
 npm install
