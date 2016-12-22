@@ -27,7 +27,6 @@ emitter.on("every_ten_seconds", function () {
 
 function checkServerHeartbeat(node, currentTime, next) {
     var diff = (currentTime - node.last_ping )
-    console.log(' diff ========>', diff)
     if (diff > 30) {
         db.get('Nodes').destroy({where: {id: node.id}})
             .then(function () {

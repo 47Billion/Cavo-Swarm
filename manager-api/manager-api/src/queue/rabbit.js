@@ -112,20 +112,12 @@ function closeOnErr(err) {
     return true;
 }
 
-/*setInterval(function () {
- publish("", "jobs4", new Buffer("work work work"));
- publish("", "job123", new Buffer("work2 work3 work4"));
- }, 1000);*/
-
 
 var publishOnQueue = function publishOnQueue(exchange, queueName, id, dataFiles, next) {
-    //startWorker(queueName, function () {
-    //    publish(exchange, queueName, new Buffer('START'));
     async.forEach(dataFiles, function (fileName, callback) {
         publish(exchange, queueName, new Buffer(fileName.entryName + ' ' + id));
         callback();
     }, function (err) {
-        //publish(exchange, queueName, new Buffer('END'));
         next();
     });
 
