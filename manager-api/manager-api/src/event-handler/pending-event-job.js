@@ -14,9 +14,32 @@ server.on('process_next_job', function () {
     processNextJob();
 });
 
-server.on('check_cluster_status', function () {
-    processNextJob();
+server.on('check_cluster_heartbeat', function (cluster) {
+    checkServerStatus(cluster);
 });
+
+var checkServerStatus = function checkServerStatus(cluster) {
+    log.info(" checkServerStatus ==========> ", cluster);
+    var nodeServer = db.get('Nodes');
+    db.get('Nodes').findOne({
+        where: {
+            cluster: cluster
+        }
+    }).then(function (node) {
+        if (!node) {
+            db.get('Clusters').update({
+                status: -1 // Booting
+            }, {
+                where: {
+                    name: cluster,
+                    status: 0
+                }
+            }).then(function () {
+                }
+            )
+        }
+    })
+}
 
 var processNextJob = function processNextJob() {
     log.info(" processNewJob ==========> ");
